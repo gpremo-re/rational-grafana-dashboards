@@ -30,7 +30,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -76,7 +76,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "$datasource"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -112,7 +112,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -158,7 +158,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "$datasource"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -202,7 +202,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -262,7 +262,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "$datasource"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -279,7 +279,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -331,7 +331,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "$datasource"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -349,7 +349,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -432,7 +432,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "$datasource"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -449,7 +449,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -532,7 +532,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "$datasource"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -549,7 +549,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -631,7 +631,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "$datasource"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -648,7 +648,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -730,7 +730,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "$datasource"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -747,7 +747,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -829,7 +829,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "$datasource"
           },
           "editorMode": "code",
           "exemplar": true,
@@ -856,12 +856,25 @@
     "list": [
       {
         "current": {
+          "text": "RRC",
+          "value": "RRC"
+        },
+        "includeAll": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
+        "current": {
           "text": "Rational Review",
           "value": "Rational Review"
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "deqn4us44edj4b"
+          "uid": "$datasource"
         },
         "definition": "label_values(application)",
         "includeAll": false,
