@@ -856,8 +856,8 @@
     "list": [
       {
         "current": {
-          "text": "RRC",
-          "value": "RRC"
+          "text": "Prometheus",
+          "value": "deqn4us44edj4b"
         },
         "includeAll": false,
         "name": "datasource",
