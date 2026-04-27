@@ -869,8 +869,8 @@
       },
       {
         "current": {
-          "text": "Rational Review",
-          "value": "Rational Review"
+          "text": "rrc",
+          "value": "rrc"
         },
         "datasource": {
           "type": "prometheus",
