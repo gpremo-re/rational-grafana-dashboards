@@ -41,6 +41,382 @@
   ],
   "panels": [
     {
+      "type": "row",
+      "title": "Overview",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 1
+      },
+      "collapsed": false,
+      "panels": [],
+      "id": 1
+    },
+    {
+      "type": "stat",
+      "title": "Pod Up",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "up{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      },
+      "id": 2
+    },
+    {
+      "type": "gauge",
+      "title": "Heap Utilization",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 4,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(jvm_memory_used_bytes{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", area=\"heap\"}) / sum(jvm_memory_max_bytes{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", area=\"heap\"})",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1,
+          "decimals": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.7
+              },
+              {
+                "color": "red",
+                "value": 0.9
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "id": 3
+    },
+    {
+      "type": "gauge",
+      "title": "CPU Usage",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 8,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "process_cpu_usage{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1,
+          "decimals": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.7
+              },
+              {
+                "color": "red",
+                "value": 0.9
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "id": 4
+    },
+    {
+      "type": "stat",
+      "title": "Requests / sec",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(rate(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[5m]))",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "decimals": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      },
+      "id": 5
+    },
+    {
+      "type": "stat",
+      "title": "5xx / sec",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(rate(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", status=~\"5..\"}[5m]))",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "decimals": 2,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.1
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      },
+      "id": 6
+    },
+    {
+      "type": "stat",
+      "title": "Hikari Active",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 20,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum(hikaricp_connections_active{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"})",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto",
+        "colorMode": "value",
+        "graphMode": "area"
+      },
+      "id": 7
+    },
+    {
+      "type": "row",
+      "title": "HTTP Details",
+      "gridPos": {
+        "x": 0,
+        "y": 5,
+        "w": 24,
+        "h": 1
+      },
+      "collapsed": false,
+      "panels": [],
+      "id": 8
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
@@ -62,11 +438,11 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 0,
+        "y": 6,
         "w": 4,
         "h": 7
       },
-      "id": 4,
+      "id": 9,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -130,55 +506,78 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 1,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "red"
               },
               {
-                "color": "red",
-                "value": 80
+                "color": "green",
+                "value": 0.8
               }
             ]
           },
-          "unit": "s"
+          "unit": "percentunit"
         },
         "overrides": []
       },
       "gridPos": {
-        "x": 12,
-        "y": 14,
-        "w": 12,
-        "h": 12
+        "x": 4,
+        "y": 6,
+        "w": 20,
+        "h": 7
       },
-      "id": 6,
+      "id": 10,
       "options": {
-        "displayMode": "lcd",
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
-        "maxVizHeight": 300,
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "12.0.0",
       "targets": [
@@ -189,15 +588,15 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum by(uri)(http_server_requests_seconds_sum{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}) / sum by(uri)(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"})",
+          "expr": "sum by(uri) (http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", status=~\"2.*\", uri!=\"/actuator/prometheus\"}) / sum by(uri) (http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"})",
           "interval": "",
-          "legendFormat": "{{method}} {{uri}}",
+          "legendFormat": "{{path}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Requests Average Duration",
-      "type": "bargauge"
+      "title": "Percent of 2xx Requests",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -227,11 +626,11 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 7,
+        "y": 13,
         "w": 4,
         "h": 7
       },
-      "id": 22,
+      "id": 11,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -318,106 +717,6 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
-              },
-              {
-                "color": "green",
-                "value": 0.8
-              }
-            ]
-          },
-          "unit": "percentunit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "x": 4,
-        "y": 0,
-        "w": 20,
-        "h": 7
-      },
-      "id": 18,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "exemplar": true,
-          "expr": "sum by(uri) (http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", status=~\"2.*\", uri!=\"/actuator/prometheus\"}) / sum by(uri) (http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"})",
-          "interval": "",
-          "legendFormat": "{{path}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Percent of 2xx Requests",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "axisSoftMax": 1,
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "area"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
                 "color": "green"
               },
               {
@@ -432,11 +731,11 @@
       },
       "gridPos": {
         "x": 4,
-        "y": 7,
+        "y": 13,
         "w": 20,
         "h": 7
       },
-      "id": 20,
+      "id": 12,
       "options": {
         "legend": {
           "calcs": [],
@@ -531,11 +830,11 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 14,
+        "y": 20,
         "w": 12,
         "h": 12
       },
-      "id": 12,
+      "id": 13,
       "options": {
         "legend": {
           "calcs": [],
@@ -569,20 +868,317 @@
       "type": "timeseries"
     },
     {
-      "id": 24,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-GrYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 20,
+        "w": 12,
+        "h": 12
+      },
+      "id": 14,
+      "options": {
+        "displayMode": "lcd",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum by(uri)(http_server_requests_seconds_sum{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}) / sum by(uri)(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"})",
+          "interval": "",
+          "legendFormat": "{{method}} {{uri}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Requests Average Duration",
+      "type": "bargauge"
+    },
+    {
+      "id": 15,
+      "type": "timeseries",
+      "title": "Status Code Rate (stacked)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 32,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum by (status_class) (  label_replace(    rate(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[5m]),    \"status_class\", \"${1}xx\", \"status\", \"(.)..\"  ))",
+          "legendFormat": "{{status_class}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "decimals": 2,
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 25,
+            "stacking": {
+              "mode": "normal"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": [
+            "last",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      }
+    },
+    {
+      "id": 16,
+      "type": "timeseries",
+      "title": "Outcome Rate (stacked)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 32,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum by (outcome) (rate(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[5m]))",
+          "legendFormat": "{{outcome}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "decimals": 2,
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 25,
+            "stacking": {
+              "mode": "normal"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": [
+            "last",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      }
+    },
+    {
+      "id": 17,
+      "type": "timeseries",
+      "title": "Top 10 URIs by Request Rate",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 40,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "topk(10, sum by (uri) (rate(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[5m])))",
+          "legendFormat": "{{uri}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "decimals": 2,
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 5,
+            "stacking": {
+              "mode": "none"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": [
+            "last",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      }
+    },
+    {
+      "id": 18,
+      "type": "timeseries",
+      "title": "Top 10 URIs by Avg Latency",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 40,
+        "w": 12,
+        "h": 8
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "topk(10,   sum by (uri) (rate(http_server_requests_seconds_sum{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[5m]))  /   sum by (uri) (rate(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[5m])))",
+          "legendFormat": "{{uri}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "decimals": 4,
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "fillOpacity": 5,
+            "stacking": {
+              "mode": "none"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "calcs": [
+            "last",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      }
+    },
+    {
       "type": "row",
       "title": "JVM Memory",
       "gridPos": {
         "x": 0,
-        "y": 43,
+        "y": 48,
         "w": 24,
         "h": 1
       },
       "collapsed": false,
-      "panels": []
+      "panels": [],
+      "id": 19
     },
     {
-      "id": 25,
+      "id": 20,
       "type": "timeseries",
       "title": "Heap Used (stacked by area)",
       "datasource": {
@@ -591,7 +1187,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 44,
+        "y": 49,
         "w": 12,
         "h": 8
       },
@@ -637,7 +1233,7 @@
       }
     },
     {
-      "id": 26,
+      "id": 21,
       "type": "timeseries",
       "title": "Heap vs Committed vs Max",
       "datasource": {
@@ -646,7 +1242,7 @@
       },
       "gridPos": {
         "x": 12,
-        "y": 44,
+        "y": 49,
         "w": 12,
         "h": 8
       },
@@ -710,7 +1306,7 @@
       }
     },
     {
-      "id": 27,
+      "id": 22,
       "type": "timeseries",
       "title": "Non-Heap Used (by area)",
       "datasource": {
@@ -719,7 +1315,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 52,
+        "y": 57,
         "w": 12,
         "h": 8
       },
@@ -765,7 +1361,7 @@
       }
     },
     {
-      "id": 28,
+      "id": 23,
       "type": "timeseries",
       "title": "GC Pause Time (rate)",
       "datasource": {
@@ -774,7 +1370,7 @@
       },
       "gridPos": {
         "x": 12,
-        "y": 52,
+        "y": 57,
         "w": 12,
         "h": 8
       },
@@ -820,20 +1416,20 @@
       }
     },
     {
-      "id": 29,
       "type": "row",
       "title": "Threads",
       "gridPos": {
         "x": 0,
-        "y": 60,
+        "y": 65,
         "w": 24,
         "h": 1
       },
       "collapsed": false,
-      "panels": []
+      "panels": [],
+      "id": 24
     },
     {
-      "id": 30,
+      "id": 25,
       "type": "timeseries",
       "title": "Thread States (stacked)",
       "datasource": {
@@ -842,7 +1438,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 61,
+        "y": 66,
         "w": 12,
         "h": 8
       },
@@ -887,7 +1483,7 @@
       }
     },
     {
-      "id": 31,
+      "id": 26,
       "type": "timeseries",
       "title": "Live vs Daemon Threads",
       "datasource": {
@@ -896,7 +1492,7 @@
       },
       "gridPos": {
         "x": 12,
-        "y": 61,
+        "y": 66,
         "w": 12,
         "h": 8
       },
@@ -950,20 +1546,20 @@
       }
     },
     {
-      "id": 32,
       "type": "row",
       "title": "Connections",
       "gridPos": {
         "x": 0,
-        "y": 69,
+        "y": 74,
         "w": 24,
         "h": 1
       },
       "collapsed": false,
-      "panels": []
+      "panels": [],
+      "id": 27
     },
     {
-      "id": 33,
+      "id": 28,
       "type": "timeseries",
       "title": "Hikari Pool — Active / Idle / Pending",
       "datasource": {
@@ -972,7 +1568,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 70,
+        "y": 75,
         "w": 12,
         "h": 8
       },
@@ -1035,7 +1631,7 @@
       }
     },
     {
-      "id": 34,
+      "id": 29,
       "type": "timeseries",
       "title": "Hikari Pool — Max / Min / In-Use Stats",
       "datasource": {
@@ -1044,7 +1640,7 @@
       },
       "gridPos": {
         "x": 12,
-        "y": 70,
+        "y": 75,
         "w": 12,
         "h": 8
       },
@@ -1107,20 +1703,20 @@
       }
     },
     {
-      "id": 35,
       "type": "row",
       "title": "System",
       "gridPos": {
         "x": 0,
-        "y": 78,
+        "y": 83,
         "w": 24,
         "h": 1
       },
       "collapsed": false,
-      "panels": []
+      "panels": [],
+      "id": 30
     },
     {
-      "id": 36,
+      "id": 31,
       "type": "timeseries",
       "title": "Process CPU Usage",
       "datasource": {
@@ -1129,7 +1725,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 79,
+        "y": 84,
         "w": 8,
         "h": 8
       },
@@ -1184,7 +1780,7 @@
       }
     },
     {
-      "id": 37,
+      "id": 32,
       "type": "timeseries",
       "title": "System Load (1m)",
       "datasource": {
@@ -1193,7 +1789,7 @@
       },
       "gridPos": {
         "x": 8,
-        "y": 79,
+        "y": 84,
         "w": 8,
         "h": 8
       },
@@ -1238,7 +1834,7 @@
       }
     },
     {
-      "id": 38,
+      "id": 33,
       "type": "timeseries",
       "title": "Open File Descriptors",
       "datasource": {
@@ -1247,7 +1843,7 @@
       },
       "gridPos": {
         "x": 16,
-        "y": 79,
+        "y": 84,
         "w": 8,
         "h": 8
       },
@@ -1282,239 +1878,6 @@
             }
           },
           "decimals": 0
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "calcs": [
-            "last",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      }
-    },
-    {
-      "id": 39,
-      "type": "row",
-      "title": "HTTP Details",
-      "gridPos": {
-        "x": 0,
-        "y": 26,
-        "w": 24,
-        "h": 1
-      },
-      "collapsed": false,
-      "panels": []
-    },
-    {
-      "id": 40,
-      "type": "timeseries",
-      "title": "Status Code Rate (stacked)",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "gridPos": {
-        "x": 0,
-        "y": 27,
-        "w": 12,
-        "h": 8
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "sum by (status_class) (  label_replace(    rate(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[5m]),    \"status_class\", \"${1}xx\", \"status\", \"(.)..\"  ))",
-          "legendFormat": "{{status_class}}"
-        }
-      ],
-      "fieldConfig": {
-        "defaults": {
-          "unit": "reqps",
-          "decimals": 2,
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "smooth",
-            "fillOpacity": 25,
-            "stacking": {
-              "mode": "normal"
-            }
-          }
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "calcs": [
-            "last",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      }
-    },
-    {
-      "id": 41,
-      "type": "timeseries",
-      "title": "Outcome Rate (stacked)",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "gridPos": {
-        "x": 12,
-        "y": 27,
-        "w": 12,
-        "h": 8
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "sum by (outcome) (rate(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[5m]))",
-          "legendFormat": "{{outcome}}"
-        }
-      ],
-      "fieldConfig": {
-        "defaults": {
-          "unit": "reqps",
-          "decimals": 2,
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "smooth",
-            "fillOpacity": 25,
-            "stacking": {
-              "mode": "normal"
-            }
-          }
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "calcs": [
-            "last",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      }
-    },
-    {
-      "id": 42,
-      "type": "timeseries",
-      "title": "Top 10 URIs by Request Rate",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "gridPos": {
-        "x": 0,
-        "y": 35,
-        "w": 12,
-        "h": 8
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "topk(10, sum by (uri) (rate(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[5m])))",
-          "legendFormat": "{{uri}}"
-        }
-      ],
-      "fieldConfig": {
-        "defaults": {
-          "unit": "reqps",
-          "decimals": 2,
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "smooth",
-            "fillOpacity": 5,
-            "stacking": {
-              "mode": "none"
-            }
-          }
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "calcs": [
-            "last",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      }
-    },
-    {
-      "id": 43,
-      "type": "timeseries",
-      "title": "Top 10 URIs by Avg Latency",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "gridPos": {
-        "x": 12,
-        "y": 35,
-        "w": 12,
-        "h": 8
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "topk(10,   sum by (uri) (rate(http_server_requests_seconds_sum{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[5m]))  /   sum by (uri) (rate(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[5m])))",
-          "legendFormat": "{{uri}}"
-        }
-      ],
-      "fieldConfig": {
-        "defaults": {
-          "unit": "s",
-          "decimals": 4,
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "smooth",
-            "fillOpacity": 5,
-            "stacking": {
-              "mode": "none"
-            }
-          }
         },
         "overrides": []
       },
