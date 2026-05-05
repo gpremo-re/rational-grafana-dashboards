@@ -2146,7 +2146,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "hikaricp_connections{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", pool=\"$hikaricp\"}",
+          "expr": "hikaricp_connections{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -2181,7 +2181,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "hikaricp_connections_active{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", pool=\"$hikaricp\"}",
+          "expr": "hikaricp_connections_active{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Active",
@@ -2192,7 +2192,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "hikaricp_connections_idle{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", pool=\"$hikaricp\"}",
+          "expr": "hikaricp_connections_idle{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Idle",
@@ -2203,7 +2203,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "hikaricp_connections_pending{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", pool=\"$hikaricp\"}",
+          "expr": "hikaricp_connections_pending{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Pending",
@@ -2237,7 +2237,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "hikaricp_connections_timeout_total{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", pool=\"$hikaricp\"}",
+          "expr": "hikaricp_connections_timeout_total{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -2272,7 +2272,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "hikaricp_connections_creation_seconds_sum{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", pool=\"$hikaricp\"} / hikaricp_connections_creation_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", pool=\"$hikaricp\"}",
+          "expr": "hikaricp_connections_creation_seconds_sum{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"} / hikaricp_connections_creation_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Creation Time",
@@ -2307,7 +2307,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "hikaricp_connections_usage_seconds_sum{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", pool=\"$hikaricp\"} / hikaricp_connections_usage_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", pool=\"$hikaricp\"}",
+          "expr": "hikaricp_connections_usage_seconds_sum{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"} / hikaricp_connections_usage_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Usage Time",
@@ -2342,7 +2342,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "hikaricp_connections_acquire_seconds_sum{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", pool=\"$hikaricp\"} / hikaricp_connections_acquire_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", pool=\"$hikaricp\"}",
+          "expr": "hikaricp_connections_acquire_seconds_sum{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"} / hikaricp_connections_acquire_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Acquire Time",
@@ -2958,28 +2958,6 @@
           "refId": "podVar"
         },
         "definition": "label_values(up{rrc_site=\"$site\", rrc_component=\"$type\"}, instance)",
-        "refresh": 1,
-        "includeAll": false,
-        "multi": false,
-        "current": {},
-        "options": [],
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1
-      },
-      {
-        "name": "hikaricp",
-        "label": "HikariCP-Pool",
-        "type": "query",
-        "datasource": {
-          "type": "prometheus",
-          "uid": "prometheus"
-        },
-        "query": {
-          "query": "label_values(hikaricp_connections{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}, pool)",
-          "refId": "hikaricpVar"
-        },
-        "definition": "label_values(hikaricp_connections{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}, pool)",
         "refresh": 1,
         "includeAll": false,
         "multi": false,
