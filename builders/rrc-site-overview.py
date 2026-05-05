@@ -220,7 +220,7 @@ def build_scaffold():
     return {
         "title": "RRC Site Overview",
         "uid": "rrc-site-overview",
-        "tags": ["rrc", "site", "overview"],
+        "tags": ["rrc", "site", "overview", "spring boot", "java"],
         "schemaVersion": 41,
         "version": 0,
         "refresh": "30s",
