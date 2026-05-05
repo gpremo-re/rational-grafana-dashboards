@@ -25,12 +25,25 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 3,
-  "links": [],
+  "links": [
+    {
+      "title": "Site overview (RRC Site Overview)",
+      "type": "link",
+      "icon": "external link",
+      "url": "/d/rrc-site-overview/rrc-site-overview",
+      "targetBlank": false,
+      "keepTime": true,
+      "includeVars": true,
+      "asDropdown": false,
+      "tooltip": "",
+      "tags": []
+    }
+  ],
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -76,11 +89,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(http_server_requests_seconds_count{application=\"$app_name\", uri!=\"/actuator/prometheus\"})",
+          "expr": "sum(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "",
@@ -112,7 +125,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -158,11 +171,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum by(uri) (http_server_requests_seconds_count{application=\"$app_name\", uri!=\"/actuator/prometheus\"})",
+          "expr": "sum by(uri) (http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "{{method}} {{uri}}",
@@ -202,7 +215,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -262,11 +275,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum by(uri)(http_server_requests_seconds_sum{application=\"$app_name\"}) / sum by(uri)(http_server_requests_seconds_count{application=\"$app_name\"})",
+          "expr": "sum by(uri)(http_server_requests_seconds_sum{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}) / sum by(uri)(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"})",
           "interval": "",
           "legendFormat": "{{method}} {{uri}}",
           "range": true,
@@ -279,7 +292,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -331,11 +344,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(http_server_requests_seconds_count{application=\"$app_name\", outcome=\"SERVER_ERROR\"})",
+          "expr": "sum(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", outcome=\"SERVER_ERROR\"})",
           "interval": "",
           "legendFormat": "",
           "range": true,
@@ -349,7 +362,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -432,11 +445,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum by(uri) (http_server_requests_seconds_count{application=\"$app_name\", status=~\"2.*\", uri!=\"/actuator/prometheus\"}) / sum by(uri) (http_server_requests_seconds_count{application=\"$app_name\", uri!=\"/actuator/prometheus\"})",
+          "expr": "sum by(uri) (http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", status=~\"2.*\", uri!=\"/actuator/prometheus\"}) / sum by(uri) (http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"})",
           "interval": "",
           "legendFormat": "{{path}}",
           "range": true,
@@ -449,7 +462,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -532,11 +545,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum by(uri) (http_server_requests_seconds_count{application=\"$app_name\", status=~\"5.*\", uri!=\"/actuator/prometheus\"}) / sum by(uri) (http_server_requests_seconds_count{application=\"$app_name\", uri!=\"/actuator/prometheus\"})",
+          "expr": "sum by(uri) (http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", status=~\"5.*\", uri!=\"/actuator/prometheus\"}) / sum by(uri) (http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"})",
           "interval": "",
           "legendFormat": "{{uri}}",
           "range": true,
@@ -549,7 +562,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -631,11 +644,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "histogram_quantile(.99,sum(rate(http_server_requests_seconds_bucket{application=\"$app_name\", uri!=\"/actuator/prometheus\"}[1m])) by(uri, le))",
+          "expr": "histogram_quantile(.99,sum(rate(http_server_requests_seconds_bucket{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[1m])) by(uri, le))",
           "interval": "",
           "legendFormat": "{{uri}}",
           "range": true,
@@ -648,7 +661,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -730,11 +743,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "histogram_quantile(.95,sum(rate(http_server_requests_seconds_bucket{application=\"$app_name\", uri!=\"/actuator/prometheus\"}[1m])) by(uri, le))",
+          "expr": "histogram_quantile(.95,sum(rate(http_server_requests_seconds_bucket{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\", uri!=\"/actuator/prometheus\"}[1m])) by(uri, le))",
           "interval": "",
           "legendFormat": "{{uri}}",
           "range": true,
@@ -747,7 +760,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "deqn4us44edj4b"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -829,11 +842,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "deqn4us44edj4b"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum by(uri)(rate(http_server_requests_seconds_count{application=\"$app_name\"}[1m]))",
+          "expr": "sum by(uri)(rate(http_server_requests_seconds_count{rrc_site=\"$site\", rrc_component=\"$type\", instance=\"$pod\"}[1m]))",
           "interval": "",
           "legendFormat": "{{uri}}",
           "range": true,
@@ -855,44 +868,73 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "text": "rrc",
-          "value": "rrc"
-        },
+        "name": "site",
+        "label": "Site",
+        "type": "query",
         "datasource": {
           "type": "prometheus",
-          "uid": "deqn4us44edj4b"
+          "uid": "prometheus"
         },
-        "definition": "label_values(application)",
-        "includeAll": false,
-        "label": "Application Name",
-        "name": "app_name",
-        "options": [],
         "query": {
-          "query": "label_values(application)",
-          "refId": "StandardVariableQuery"
+          "query": "label_values(up, rrc_site)",
+          "refId": "siteVar"
         },
+        "definition": "label_values(up, rrc_site)",
         "refresh": 1,
+        "includeAll": false,
+        "multi": false,
+        "current": {},
+        "options": [],
         "regex": "",
-        "type": "query"
+        "skipUrlSync": false,
+        "sort": 1
       },
       {
-        "current": {
-          "text": "",
-          "value": ""
+        "name": "type",
+        "label": "Type",
+        "type": "query",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
         },
-        "description": "query with keyword",
-        "label": "Log Query",
-        "name": "log_keyword",
-        "options": [
-          {
-            "selected": true,
-            "text": "",
-            "value": ""
-          }
-        ],
-        "query": "",
-        "type": "textbox"
+        "query": {
+          "query": "label_values(up{rrc_site=\"$site\"}, rrc_component)",
+          "refId": "typeVar"
+        },
+        "definition": "label_values(up{rrc_site=\"$site\"}, rrc_component)",
+        "refresh": 1,
+        "includeAll": false,
+        "multi": false,
+        "current": {
+          "text": "process",
+          "value": "process"
+        },
+        "options": [],
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1
+      },
+      {
+        "name": "pod",
+        "label": "Pod",
+        "type": "query",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "query": {
+          "query": "label_values(up{rrc_site=\"$site\", rrc_component=\"$type\"}, instance)",
+          "refId": "podVar"
+        },
+        "definition": "label_values(up{rrc_site=\"$site\", rrc_component=\"$type\"}, instance)",
+        "refresh": 1,
+        "includeAll": false,
+        "multi": false,
+        "current": {},
+        "options": [],
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1
       }
     ]
   },
@@ -902,7 +944,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Spring Boot (RRC)",
-  "uid": "dLsDQIUnzb",
-  "version": 2
+  "title": "RRC Pod Details",
+  "uid": "rrc-pod-details",
+  "version": 0
 }

@@ -1044,13 +1044,13 @@
   ],
   "links": [
     {
-      "title": "Per-pod deep dive (Spring Boot 3)",
+      "title": "Per-pod deep dive (RRC Pod Details)",
       "type": "link",
       "icon": "external link",
-      "url": "/d/spring_boot_21/rrc-spring-boot-3-statistics",
+      "url": "/d/rrc-pod-details/rrc-pod-details",
       "targetBlank": false,
       "keepTime": true,
-      "includeVars": false,
+      "includeVars": true,
       "asDropdown": false,
       "tooltip": "",
       "tags": []

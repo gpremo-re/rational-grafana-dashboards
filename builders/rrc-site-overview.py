@@ -214,7 +214,7 @@ def build_scaffold():
         "title": "Per-pod deep dive (Spring Boot 3)",
         "type": "dashboards", "tags": [], "asDropdown": False,
         "icon": "external link", "includeVars": False, "keepTime": True,
-        "targetBlank": False, "url": "/d/spring_boot_21/rrc-spring-boot-3-statistics",
+        "targetBlank": False, "url": "/d/rrc-pod-details/rrc-pod-details",
     }]
 
     return {
@@ -241,10 +241,10 @@ def build_scaffold():
 def mutate_links_to_explicit_url(dash):
     """idx 869: replace `links[*].type=dashboards` with explicit `type=link` to a single drill-down."""
     dash["links"] = [{
-        "title": "Per-pod deep dive (Spring Boot 3)",
+        "title": "Per-pod deep dive (RRC Pod Details)",
         "type": "link", "icon": "external link",
-        "url": "/d/spring_boot_21/rrc-spring-boot-3-statistics",
-        "targetBlank": False, "keepTime": True, "includeVars": False,
+        "url": "/d/rrc-pod-details/rrc-pod-details",
+        "targetBlank": False, "keepTime": True, "includeVars": True,
         "asDropdown": False, "tooltip": "", "tags": [],
     }]
 
